@@ -1,10 +1,14 @@
 module.exports = async (req, res) => {
-    // CORS ruxsatlari
+    // 1. Har qanday manbadan kelgan so'rovga ruxsat berish
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    if (req.method === 'OPTIONS') return res.status(200).end();
+    // 2. OPTIONS so'rovi (CORS uchun muhim)
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
 
     if (req.method === 'POST') {
         try {
@@ -19,9 +23,11 @@ module.exports = async (req, res) => {
             });
 
             const data = await response.json();
-            return res.status(200).json(data);
+            res.status(200).json(data);
         } catch (error) {
-            return res.status(500).json({ error: error.toString() });
+            res.status(500).json({ error: error.message });
         }
+    } else {
+        res.status(405).send('Method Not Allowed');
     }
 };
