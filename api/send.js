@@ -10,6 +10,10 @@ module.exports = async (req, res) => {
         try {
             const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
             const { email, phone, text } = body;
+            // --- MA'LUMOTLAR BORLIGINI TEKSHIRISH ---
+            if (!email || !phone) {
+                return res.status(400).json({ error: "Email va telefon raqami kiritilishi shart!" });
+            }
 
             // --- TEKSHIRUV (Validation) ---
             // Bu yerga o'zingizning AbstractAPI kalitlaringizni qo'ying!
