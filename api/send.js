@@ -13,8 +13,8 @@ module.exports = async (req, res) => {
 
             // --- TEKSHIRUV (Validation) ---
             // Bu yerga o'zingizning AbstractAPI kalitlaringizni qo'ying!
-            const EMAIL_KEY = "70ddf60a...."; 
-            const PHONE_KEY = "cd801b01....";
+            const EMAIL_KEY = "70ddf60ad004474092a288f62b8067e1"; 
+            const PHONE_KEY = "cd801b011fd84a99a665bc19d556d817";
 
             // Emailni tekshirish
             const emailCheck = await fetch(`https://emailvalidation.abstractapi.com/v1/?api_key=${EMAIL_KEY}&email=${email}`);
